@@ -24,12 +24,10 @@ function player() {
 }
 
 
-function squareFree(square) {
-  return $(square).text === "" ? true : false;
-}
-
 function updateState(square) {
+  if ($(this).text() === "") {
     return $(square).text(player());
+  }
 }
 
 function setMessage(string) {
