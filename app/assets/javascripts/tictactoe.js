@@ -23,7 +23,6 @@ function player() {
   return symbol;
 }
 
-
 function updateState(square) {
   if ($(this).text() === "") {
     return $(square).text(player());
@@ -80,7 +79,7 @@ function resetBoard() {
 }
 
 function attachListeners() {
-  $("td").on('click', () => {
+  $("td").on('click', function() {
     if ($(this).text() === "" && !checkWinner()) {
       doTurn(this);
     }

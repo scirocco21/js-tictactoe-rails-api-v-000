@@ -14,17 +14,15 @@ Platform:
   linux x64
 
 Trace: 
-  Error: http://registry.npmjs.org/mkdirp/-/mkdirp-0.5.1.tgz: Request failed "500 Internal Server Error"
-      at ResponseError.ExtendableBuiltin (/usr/share/yarn/lib/cli.js:218:66)
-      at new ResponseError (/usr/share/yarn/lib/cli.js:324:124)
-      at Request.<anonymous> (/usr/share/yarn/lib/cli.js:61013:26)
-      at emitOne (events.js:116:13)
-      at Request.emit (events.js:211:7)
-      at Request.module.exports.Request.onRequestResponse (/usr/share/yarn/lib/cli.js:138345:10)
-      at emitOne (events.js:116:13)
-      at ClientRequest.emit (events.js:211:7)
-      at HTTPParser.parserOnIncomingClient (_http_client.js:543:21)
-      at HTTPParser.parserOnHeadersComplete (_http_common.js:112:17)
+  TypeError: Path must be a string. Received { testEnvironment: 'node', version: '^23.5.0' }
+      at assertPath (path.js:28:11)
+      at Object.isAbsolute (path.js:1225:5)
+      at module.exports.exports.default (/usr/share/yarn/lib/cli.js:91259:16)
+      at /usr/share/yarn/lib/cli.js:52276:63
+      at Generator.next (<anonymous>)
+      at step (/usr/share/yarn/lib/cli.js:92:30)
+      at /usr/share/yarn/lib/cli.js:103:13
+      at <anonymous>
 
 npm manifest: 
   {
@@ -56,7 +54,11 @@ npm manifest:
     "homepage": "https://github.com/learn-co-curriculum/js-tictactoe-rails-api",
     "devDependencies": {
       "chai": "^4.0.2",
-      "jsdom": "^11.0.0",
+      "jest": {
+        "testEnvironment": "node",
+        "version": "^23.5.0"
+      },
+      "jsdom": "^11.11.0",
       "mocha": "^3.4.2",
       "mocha-multi": "^0.11.0",
       "sinon": "^2.3.4"

@@ -302,17 +302,15 @@ describe('Gameplay', () => {
     resetFixtures();
   });
 
-  // check why this test in failing when project works in browser
 
-  // it('Users cannot place a token in a square that is already taken', () => {
-  //   squares[0].innerHTML = 'X';
-  //   window.turn = 1;
-  //
-  //   squares[0].click();
-  //
-  //   expect(squares[0].innerHTML).to.equal('X');
-  //   expect(window.turn).to.equal(1);
-  // });
+  it('Users cannot place a token in a square that is already taken', () => {
+    squares[0].innerHTML = 'X';
+    window.turn = 1;
+
+    squares[0].click();
+    expect(squares[0].innerHTML).to.equal('X');
+    expect(window.turn).to.equal(1);
+  });
 
   it('Users cannot play any turns once a game is won or tied', () => {
     populateBoard(['X', 'X', 'X', '', '', '', 'O', 'O', '']);
