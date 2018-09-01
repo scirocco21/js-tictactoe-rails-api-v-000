@@ -1,0 +1,70 @@
+Arguments: 
+  /usr/bin/node /usr/share/yarn/bin/yarn.js install --no-lockfile
+
+PATH: 
+  /var/opt/rails/bin:/var/opt/httpserver/bin:/var/opt/atom/bin:/var/opt/shotgun/bin:/var/opt/rackup/bin:/var/opt/jekyll/bin:/usr/local/rvm/gems/ruby-2.3.1/bin:/usr/local/rvm/gems/ruby-2.3.1@global/bin:/usr/local/rvm/rubies/ruby-2.3.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/rvm/bin
+
+Yarn version: 
+  1.9.4
+
+Node version: 
+  8.11.4
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: http://registry.npmjs.org/mkdirp/-/mkdirp-0.5.1.tgz: Request failed "500 Internal Server Error"
+      at ResponseError.ExtendableBuiltin (/usr/share/yarn/lib/cli.js:218:66)
+      at new ResponseError (/usr/share/yarn/lib/cli.js:324:124)
+      at Request.<anonymous> (/usr/share/yarn/lib/cli.js:61013:26)
+      at emitOne (events.js:116:13)
+      at Request.emit (events.js:211:7)
+      at Request.module.exports.Request.onRequestResponse (/usr/share/yarn/lib/cli.js:138345:10)
+      at emitOne (events.js:116:13)
+      at ClientRequest.emit (events.js:211:7)
+      at HTTPParser.parserOnIncomingClient (_http_client.js:543:21)
+      at HTTPParser.parserOnHeadersComplete (_http_common.js:112:17)
+
+npm manifest: 
+  {
+    "name": "js-tictactoe-rails-api",
+    "version": "0.1.0",
+    "description": "Second half of the final lab in Learn.co's Rails and JavaScript topic.",
+    "main": "app/assets/javascripts/tictactoe.js",
+    "scripts": {
+      "test": "mocha -R mocha-multi --reporter-options nyan=-,json=.results.json"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/learn-co-curriculum/js-tictactoe-rails-api.git"
+    },
+    "keywords": [
+      "javascript",
+      "jquery",
+      "rails",
+      "rails api",
+      "selectors",
+      "single-page application",
+      "tic-tac-toe"
+    ],
+    "author": "gj",
+    "license": "SEE LICENSE IN LICENSE.md",
+    "bugs": {
+      "url": "https://github.com/learn-co-curriculum/js-tictactoe-rails-api/issues"
+    },
+    "homepage": "https://github.com/learn-co-curriculum/js-tictactoe-rails-api",
+    "devDependencies": {
+      "chai": "^4.0.2",
+      "jsdom": "^11.0.0",
+      "mocha": "^3.4.2",
+      "mocha-multi": "^0.11.0",
+      "sinon": "^2.3.4"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

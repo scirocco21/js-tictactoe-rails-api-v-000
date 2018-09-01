@@ -1,7 +1,6 @@
-// Code your JavaScript / jQuery solution here
 // game setup
-let turnCount = 0;
-let board = [];
+var turn = 0;
+var board = [];
 
 const winCombinations = [
   [0, 1, 2],
@@ -15,8 +14,8 @@ const winCombinations = [
 ];
 
 function player() {
-  let symbol;
-  if (turnCount % 2 === 0) {
+  let symbol = 0;
+  if (turn % 2 === 0 || turn === 0) {
     symbol = 'X'
   } else {
     symbol = 'O'
@@ -24,14 +23,13 @@ function player() {
   return symbol;
 }
 
+
 function squareFree(square) {
-  $(square).text === "" ? true : false;
+  return $(square).text === "" ? true : false;
 }
 
 function updateState(square) {
-  if (squareFree) {
     return $(square).text(player());
-  }
 }
 
 function setMessage(string) {
@@ -67,6 +65,33 @@ function checkWinner() {
 
 function doTurn(square) {
   updateState(square);
-    turnCount ++;
-  checkWinner();
+  turn += 1;
+
+  if (checkWinner()) {
+    resetBoard();
+  } else if (turn === 9) {
+    setMessage("Tie game.");
+    resetBoard();
+  }
 }
+
+function resetBoard() {
+  board = [];
+  turn = 0
+  $("td").text("")
+}
+
+function attachListeners() {
+  $("td").on('click', () => {
+    if ($(this).text() === "" && !checkWinner()) {
+      doTurn(this);
+    }
+  });
+  // $('#previous').on('click', () => previousGames());
+  // $('#save').on('click', () => saveGame());
+  // $('#clear').on('click', () => resetBoard());
+}
+
+$(document).ready(function() {
+  attachListeners();
+});
