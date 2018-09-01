@@ -1,6 +1,7 @@
 // game setup
 var turn = 0;
 var board = [];
+var gameId = 0
 
 const winCombinations = [
   [0, 1, 2],
@@ -74,7 +75,7 @@ function doTurn(square) {
 
 function resetBoard() {
   board = [];
-  turn = 0
+  turn = 0;
   $("td").text("")
 }
 
@@ -85,8 +86,32 @@ function attachListeners() {
     }
   });
   // $('#previous').on('click', () => previousGames());
-  // $('#save').on('click', () => saveGame());
-  // $('#clear').on('click', () => resetBoard());
+  $('#save').on('click', () => saveGame());
+  $('#clear').on('click', () => resetBoard());
+}
+
+function saveGame() {
+  // grab all the table data squares, assemble them into an array, and make new array with only inner text
+  let gameData = $("td");
+  console.log(gameData)
+  let boardState = gameData.map(square => square.text);
+  console.log(boardState)
+  // post game state to server
+  if (gameId) {
+    // 'ajax' required here instead of post because PATH method needs to be specified in request
+    $.ajax({
+      type: 'PATCH',
+        // patch to '/games/:id'
+      url: `/games/${currentGame}`,
+        // 'state' will go into the params hash and is whitelisted by strong params
+      data: { state: boardState }
+    });
+  } else {
+    $.post("/games", { state: boardState }).done(function (response) {
+      console.log(response);
+      currentGame = response.data.id;
+    })
+  }
 }
 
 $(document).ready(function() {
