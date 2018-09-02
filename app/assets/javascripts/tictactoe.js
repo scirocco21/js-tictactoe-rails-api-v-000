@@ -135,7 +135,7 @@ function saveGame() {
     });
   } else {
     $.post("/games", { state: boardState }).done(function (response) {
-      currentGame = response.data.id;
+      gameId = response.data.id;
     })
   }
 }
