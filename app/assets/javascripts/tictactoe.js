@@ -112,7 +112,7 @@ function previousGames() {
 function loadGame(id) {
   $.get(`/games/${id}`, function(response) {
     var loadState = response.data.attributes.state;
-    for (let i = 0; i < loadState.length; i++) {
+    for (var i = 0; i < loadState.length; i++) {
       $("td").eq(i).text(loadState[i])
     }
   })
