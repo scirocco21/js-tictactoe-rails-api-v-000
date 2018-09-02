@@ -139,10 +139,12 @@ function saveGame() {
     });
   } else {
     $.post("/games", { state: boardState }).done(function (response) {
+      $('#games').append(`<button id="${response.data.id}">Game Number: ${response.data.id}</button><br>`);
       gameId = response.data.id;
     })
   }
 }
+
 
 $(document).ready(function() {
   attachListeners();
