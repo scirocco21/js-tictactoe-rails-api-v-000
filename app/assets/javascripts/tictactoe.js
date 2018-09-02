@@ -133,7 +133,6 @@ function saveGame() {
     });
   } else {
     $.post("/games", { state: boardState }).done(function (response) {
-      console.log(response);
       currentGame = response.data.id;
     })
   }
