@@ -78,6 +78,7 @@ function doTurn(square) {
 function resetBoard() {
   board = [];
   turn = 0;
+  gameId = 0
   $("td").text("")
   setMessage("")
 }
