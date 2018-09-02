@@ -1,7 +1,7 @@
 // game setup
 var turn = 0;
 var board = [];
-var gameId = 0
+var gameId = 0;
 
 const winCombinations = [
   [0, 1, 2],
@@ -66,9 +66,11 @@ function doTurn(square) {
   turn += 1;
 
   if (checkWinner()) {
+    saveGame()
     resetBoard();
   } else if (turn === 9) {
     setMessage("Tie game.");
+    saveGame()
     resetBoard();
   }
 }
@@ -76,7 +78,9 @@ function doTurn(square) {
 function resetBoard() {
   board = [];
   turn = 0;
+  gameId = 0
   $("td").text("")
+  setMessage("")
 }
 
 function attachListeners() {
@@ -85,31 +89,57 @@ function attachListeners() {
       doTurn(this);
     }
   });
-  // $('#previous').on('click', () => previousGames());
+  $('#previous').on('click', () => previousGames());
   $('#save').on('click', () => saveGame());
   $('#clear').on('click', () => resetBoard());
 }
 
+function previousGames() {
+  // if #games is already populated, don't do anything (simplest implementation)
+  if ($("#games").html() === "") {
+    $.get("/games").done(function(response) {
+      // the response contains a data array - to load invidiual games, store the id values of each game to construct the route for get 'games/:id'
+      var gamesIds = response.data.map(game => game.id);
+      gamesIds.forEach(id =>
+        $("#games").append(`<button class='previous-games' id="${id}">Game Number: ${id}</button><br>`))
+        // button needs to have click event bound to it
+      $("button.previous-games").on('click', function(event) {
+        event.preventDefault();
+        loadGame(this.id);
+      });
+    });
+  }
+}
+
+function loadGame(id) {
+  $.get(`/games/${id}`, function(response) {
+    var loadState = response.data.attributes.state;
+    for (var i = 0; i < loadState.length; i++) {
+      $("td").eq(i).text(loadState[i])
+    }
+    gameId = response.id;
+    turn = loadState.join("").length;
+  })
+}
+
 function saveGame() {
   // grab all the table data squares, assemble them into an array, and make new array with only inner text
-  let gameData = $("td");
-  console.log(gameData)
-  let boardState = gameData.map(square => square.text);
-  console.log(boardState)
+  // JQuery returns a special kind of object, not an array, so it's not mappable and needs toArray method()
+  var gameData = $("td").toArray();
+  var boardState = gameData.map(square => square.textContent);
   // post game state to server
   if (gameId) {
     // 'ajax' required here instead of post because PATH method needs to be specified in request
     $.ajax({
       type: 'PATCH',
         // patch to '/games/:id'
-      url: `/games/${currentGame}`,
+      url: `/games/${gameId}`,
         // 'state' will go into the params hash and is whitelisted by strong params
       data: { state: boardState }
     });
   } else {
     $.post("/games", { state: boardState }).done(function (response) {
-      console.log(response);
-      currentGame = response.data.id;
+      gameId = response.data.id;
     })
   }
 }
