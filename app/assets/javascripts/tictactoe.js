@@ -121,8 +121,8 @@ function loadGame(id) {
 function saveGame() {
   // grab all the table data squares, assemble them into an array, and make new array with only inner text
   // JQuery returns a special kind of object, not an array, so it's not mappable and needs toArray method()
-  let gameData = $("td").toArray();
-  let boardState = gameData.map(square => square.textContent);
+  var gameData = $("td").toArray();
+  var boardState = gameData.map(square => square.textContent);
   // post game state to server
   if (gameId) {
     // 'ajax' required here instead of post because PATH method needs to be specified in request
