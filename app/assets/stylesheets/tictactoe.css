@@ -1,0 +1,66 @@
+@font-face {
+  font-family: "trench";
+  src: url('trench.ttf') format("truetype");
+}
+
+body {
+  background: url("background.jpg") no-repeat center center fixed;
+  background-size: cover;
+  height: 100%;
+  display: grid;
+}
+
+header {
+    font-family: "trench";
+    font-weight: bold;
+    font-size: 84px;
+    color: white;
+    margin: auto;
+    text-transform: uppercase;
+     letter-spacing: 3px;
+}
+
+.fa {
+  color: white;
+}
+
+#message {
+  color: white;
+  height: 10px;
+  width: 10px;
+  font-size: 24px;
+}
+
+.game {
+  width: 660px;
+  min-height: 680px;
+  margin: auto;
+  background: -webkit-linear-gradient(68deg, rgba(100,58,180,1) 15%, rgba(193,128,173,1) 41%, rgba(135,69,252,1) 97%);
+  background: -o-linear-gradient(68deg, rgba(100,58,180,1) 15%, rgba(193,128,173,1) 41%, rgba(135,69,252,1) 97%);
+  background: linear-gradient(158deg, rgba(100,58,180,1) 15%, rgba(193,128,173,1) 41%, rgba(135,69,252,1) 97%);
+  padding: 32px;
+  border-radius: 10px;
+  box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+}
+
+.card {
+  height: 170px;
+  width: 170px;
+  background: #2e3d49;
+  font-size: 62px;
+
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div#controller {
+  margin: auto;
+}
