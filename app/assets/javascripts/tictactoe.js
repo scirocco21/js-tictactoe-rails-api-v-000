@@ -88,6 +88,7 @@ function resetBoard() {
   turn = 0;
   gameId = 0
   $("i").removeClass("fa-rocket fa-space-shuttle");
+  $("card").removeClass("filled");
   setMessage("")
 }
 
