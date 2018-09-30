@@ -17,7 +17,7 @@ header {
     color: white;
     margin: auto;
     text-transform: uppercase;
-     letter-spacing: 3px;
+    letter-spacing: 3px;
 }
 
 .fa {
@@ -61,6 +61,28 @@ header {
   align-items: center;
 }
 
+.card:hover {
+  background: #992D8A;
+}
+
+.filled {
+  pointer-events:none;
+}
+
 div#controller {
   margin: auto;
+}
+
+button {
+  background-color: #42308C;
+  color: white;
+  height: 38px;
+  font-size: 24px;
+  border-radius: 6px;
+  border: none;
+  font-family: "trench";
+}
+
+button:hover {
+  background-color: #BA7BB6;
 }

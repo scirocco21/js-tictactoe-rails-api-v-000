@@ -27,6 +27,7 @@ function player() {
 function updateState(square) {
   if (!$("square > i").hasClass("fa-rocket") && !$("this > i").hasClass("fa-space-shuttle")) {
     square.firstElementChild.classList.add("fa-" + player());
+    square.classList.add("filled");
   }
 }
 
