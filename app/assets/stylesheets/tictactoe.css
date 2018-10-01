@@ -81,6 +81,7 @@ button {
   border-radius: 6px;
   border: none;
   font-family: "trench";
+  cursor: pointer;
 }
 
 button:hover {

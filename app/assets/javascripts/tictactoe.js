@@ -88,7 +88,7 @@ function resetBoard() {
   turn = 0;
   gameId = 0
   $("i").removeClass("fa-rocket fa-space-shuttle");
-  $("card").removeClass("filled");
+  $("li.card").removeClass("filled");
   setMessage("")
 }
 
@@ -108,7 +108,7 @@ function previousGames() {
   if ($("#games").html() === "") {
     $.get("/games").done(function(response) {
       // the response contains a data array - to load invidiual games, store the id values of each game to construct the route for get 'games/:id'
-      var gamesIds = response.data.map(game => game.id);
+      let gamesIds = response.data.map(game => game.id);
       gamesIds.forEach(id =>
         $("#games").append(`<button class='previous-games' id="${id}">Game Number: ${id}</button><br>`))
         // button needs to have click event bound to it
@@ -122,9 +122,13 @@ function previousGames() {
 
 function loadGame(id) {
   $.get(`/games/${id}`, function(response) {
-    var loadState = response.data.attributes.state;
-    for (var i = 0; i < loadState.length; i++) {
-      $("td").eq(i).text(loadState[i])
+    let loadState = response.data.attributes.state;
+    for (let i = 0; i < loadState.length; i++) {
+      let icons = Array.from($("i"));
+      // only add rocket/spaceship to tiles when loading game
+      if (loadState[i]) {
+        icons[i].classList.add(loadState[i])
+      }
     }
     gameId = response.id;
     turn = loadState.join("").length;
@@ -134,8 +138,8 @@ function loadGame(id) {
 function saveGame() {
   // grab all the table data squares, assemble them into an array, and make new array with only inner text
   // JQuery returns a special kind of object, not an array, so it's not mappable and needs toArray method()
-  var gameData = $("td").toArray();
-  var boardState = gameData.map(square => square.textContent);
+  let gameData = $("i").toArray();
+  let boardState = gameData.map(icon => icon.classList[1]);
   // post game state to server
   if (gameId) {
     // 'ajax' required here instead of post because PATH method needs to be specified in request
