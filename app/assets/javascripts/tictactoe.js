@@ -17,22 +17,20 @@ const winCombinations = [
 function player() {
   var symbol = 0;
   if (turn % 2 === 0 || turn === 0) {
-    symbol = 'rocket'
+    symbol = 'rocket';
   } else {
-    symbol = 'space-shuttle'
+    symbol = 'space-shuttle';
   }
   return symbol;
 }
 
 function updateState(square) {
-  if (!$("square > i").hasClass("fa-rocket") && !$("this > i").hasClass("fa-space-shuttle")) {
     square.firstElementChild.classList.add("fa-" + player());
     square.classList.add("filled");
-  }
 }
 
 function setMessage(string) {
-  $('div#message').text(string);
+  $('#message').html(`<p>${string}</p>`);
 }
 
 function winningCombo(array) {
@@ -88,12 +86,12 @@ function resetBoard() {
   turn = 0;
   gameId = 0
   $("i").removeClass("fa-rocket fa-space-shuttle");
-  $("li.card").removeClass("filled");
-  setMessage("")
+  $("li.icon").removeClass("filled");
+  setTimeout(function() {setMessage("")}, 2000);
 }
 
 function attachListeners() {
-  $("li.card").on('click', function() {
+  $("li.icon").on('click', function() {
     if (!$("this > i").hasClass("fa-rocket") && !$("this > i").hasClass("fa-space-shuttle") && !checkWinner()) {
       doTurn(this);
     }
@@ -154,8 +152,9 @@ function saveGame() {
     });
   } else {
     $.post("/games", { state: boardState }).done(function (response) {
-      $('#games').append(`<button id="${response.data.id}">Game Number: ${response.data.id}</button><br>`);
-      gameId = response.data.id;
+      // $('#games').append(`<button id="${response.data.id}">Game Number: ${response.data.id}</button><br>`);
+      // gameId = response.data.id;
+      $("#message").append(`<p>Game ${response.data.id} saved</p>`)
     })
   }
 }
