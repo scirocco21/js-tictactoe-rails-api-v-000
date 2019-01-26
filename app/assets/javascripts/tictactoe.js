@@ -115,19 +115,21 @@ function previousGames() {
       $("button.previous-games").on('click', function(event) {
         event.preventDefault();
         loadGame(this.id);
-      });
+      })
     });
   }
 }
 
 function loadGame(id) {
+  resetBoard();
   $.get(`/games/${id}`, function(response) {
     let loadState = response.data.attributes.state;
     for (let i = 0; i < loadState.length; i++) {
       let icons = Array.from($("i"));
       // only add rocket/spaceship to tiles when loading game
       if (loadState[i]) {
-        icons[i].classList.add(loadState[i])
+        icons[i].classList.add(loadState[i]);
+        icons[i].parentElement.classList.add("filled");
       }
     }
     gameId = response.id;
